@@ -179,19 +179,17 @@
    anims=[back.animate([{opacity:0},{opacity:1}],{duration:FADE_MS,easing:'ease-out',fill:'forwards'})];
   }else{
    band.classList.add('is-active');
-   // One centre band: in with a 6px sideways knock, settles back, then the
-   // full incoming slide fades up over the old one.
+   // One 300ms effect. 0-200ms: the centre band shows the incoming game and
+   // shakes with shrinking swings (0,+6,-5,+4,-3,+2,0 px) while the outgoing
+   // game stays above and below it. 200-300ms: the rest of the incoming
+   // slide fades up and the picture settles. Only the band moves.
+   const SHAKE=[0,6,-5,4,-3,2,0],SHAKE_END=200/SLICE_MS;
    anims=[
-    band.animate([
-     {opacity:0,transform:'translateX(6px)',offset:0},
-     {opacity:1,transform:'translateX(6px)',offset:.06},
-     {opacity:1,transform:'translateX(6px)',offset:.4},
-     {opacity:1,transform:'translateX(0)',offset:.6},
-     {opacity:1,transform:'translateX(0)',offset:1}
-    ],{duration:SLICE_MS,easing:'linear',fill:'forwards'}),
+    band.animate(SHAKE.map((x,n)=>({opacity:1,transform:'translateX('+x+'px)',offset:n/(SHAKE.length-1)*SHAKE_END,easing:'ease-in-out'}))
+     .concat({opacity:1,transform:'translateX(0)',offset:1}),{duration:SLICE_MS,easing:'linear',fill:'forwards'}),
     back.animate([
-     {opacity:0,offset:0},{opacity:0,offset:.45},{opacity:1,offset:1}
-    ],{duration:SLICE_MS,easing:'ease-out',fill:'forwards'})
+     {opacity:0,offset:0},{opacity:0,offset:SHAKE_END,easing:'ease-out'},{opacity:1,offset:1}
+    ],{duration:SLICE_MS,easing:'linear',fill:'forwards'})
    ];
   }
   restartBar();
