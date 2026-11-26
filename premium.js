@@ -83,6 +83,7 @@
  document.querySelectorAll('.new-game-card').forEach(card=>{
   const svg=document.createElementNS(svgNS,'svg');svg.classList.add('card-trace');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
   for(let i=0;i<4;i++){const path=document.createElementNS(svgNS,'path');path.setAttribute('pathLength','1');svg.append(path);}
-  card.append(svg);layoutCardTrace(card);cardResize.observe(card);
+  const sweep=document.createElement('span');sweep.className='card-sweep';sweep.setAttribute('aria-hidden','true');
+  card.append(sweep,svg);layoutCardTrace(card);cardResize.observe(card);
  });
 })();
