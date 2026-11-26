@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: vegas-studio-conceptual-website
+    runtime: static
+    staticPublishPath: .
+    buildCommand: ""
+    autoDeploy: true
+    headers:
+      # Conceptual preview with sample data: keep it out of search engines.
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow
+    routes:
+      - type: rewrite
+        source: /
+        destination: /index.html
