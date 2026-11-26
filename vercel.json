@@ -1,0 +1,351 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/recommended",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/final-direction",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/design-collection",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/logo-options",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/color-options",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/amber-ivory",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/champagne",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/emerald-gold",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/mint-gold",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ruby-gold",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/sage-linen",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/sun-gold",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/sunrise-leaf",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/company/about",
+      "destination": "/studio",
+      "permanent": false
+    },
+    {
+      "source": "/company/careers",
+      "destination": "/careers",
+      "permanent": false
+    },
+    {
+      "source": "/company/brand-guidelines",
+      "destination": "/brand",
+      "permanent": false
+    },
+    {
+      "source": "/company/responsible-gaming",
+      "destination": "/responsible-gaming",
+      "permanent": false
+    },
+    {
+      "source": "/blog/resources",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/events",
+      "destination": "/events",
+      "permanent": false
+    },
+    {
+      "source": "/partners/our-partners",
+      "destination": "/clients",
+      "permanent": false
+    },
+    {
+      "source": "/partners/affiliates",
+      "destination": "/affiliates",
+      "permanent": false
+    },
+    {
+      "source": "/partners/media-partners",
+      "destination": "/media-partners",
+      "permanent": false
+    },
+    {
+      "source": "/login",
+      "destination": "https://players.vegas.studio/login",
+      "permanent": false
+    },
+    {
+      "source": "/register",
+      "destination": "https://players.vegas.studio/register",
+      "permanent": false
+    },
+    {
+      "source": "/solutions/game-aggregator",
+      "destination": "/solution-game-aggregator",
+      "permanent": false
+    },
+    {
+      "source": "/solutions/casino-platform",
+      "destination": "/solution-casino-platform",
+      "permanent": false
+    },
+    {
+      "source": "/solutions/affiliate-management",
+      "destination": "/solution-affiliate-management",
+      "permanent": false
+    },
+    {
+      "source": "/our-solutions/marketing-tools",
+      "destination": "/marketing-tools",
+      "permanent": false
+    },
+    {
+      "source": "/our-solutions/promo-games",
+      "destination": "/promo-games",
+      "permanent": false
+    },
+    {
+      "source": "/our-solutions/custom-games",
+      "destination": "/custom-games",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-buffaloquest",
+      "destination": "/game-buffaloquest",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-fairyswish",
+      "destination": "/game-fairyswish",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-godofthenile",
+      "destination": "/game-godofthenile",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-goldenluck",
+      "destination": "/game-goldenluck",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-gorillamadness",
+      "destination": "/game-gorillamadness",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-greenhillsglory",
+      "destination": "/game-greenhillsglory",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-jugglingjackpot",
+      "destination": "/game-jugglingjackpot",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-lifeofluxury",
+      "destination": "/game-lifeofluxury",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-mechanicaltitans",
+      "destination": "/game-mechanicaltitans",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-merlinsmagic",
+      "destination": "/game-merlinsmagic",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-robinsrise",
+      "destination": "/game-robinsrise",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-rockstarriffs",
+      "destination": "/game-rockstarriffs",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-springtimedelight",
+      "destination": "/game-springtimedelight",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-steamstrikes",
+      "destination": "/game-steamstrikes",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-superhexakeno",
+      "destination": "/game-superhexakeno",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-superkeno",
+      "destination": "/game-superkeno",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-superwildkeno",
+      "destination": "/game-superwildkeno",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-tripleseven",
+      "destination": "/game-tripleseven",
+      "permanent": false
+    },
+    {
+      "source": "/games/V_GAMING-wishesandwild",
+      "destination": "/game-wishesandwild",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/live-casino",
+      "destination": "/games?category=live-casino",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/way",
+      "destination": "/games?category=way",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/keno",
+      "destination": "/games?category=keno",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/video-poker",
+      "destination": "/games?category=video-poker",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/slots",
+      "destination": "/games?category=slots",
+      "permanent": false
+    },
+    {
+      "source": "/games/tag/exclusive",
+      "destination": "/games?tag=exclusive",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/jackpot",
+      "destination": "/games?category=jackpot",
+      "permanent": false
+    },
+    {
+      "source": "/games/tag/hot",
+      "destination": "/games?tag=hot",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/table-games",
+      "destination": "/games?category=table-games",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/fishing",
+      "destination": "/games?category=fishing",
+      "permanent": false
+    },
+    {
+      "source": "/games/tag/slots",
+      "destination": "/games?tag=slots",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/lotteries",
+      "destination": "/games?category=lotteries",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/slot",
+      "destination": "/games?category=slot",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/slots-edit",
+      "destination": "/games?category=slots-edit",
+      "permanent": false
+    },
+    {
+      "source": "/games/tag/trending",
+      "destination": "/games?tag=trending",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/crash-games",
+      "destination": "/games?category=crash-games",
+      "permanent": false
+    },
+    {
+      "source": "/games/tag/popular",
+      "destination": "/games?tag=popular",
+      "permanent": false
+    },
+    {
+      "source": "/games/category/scratch-cards",
+      "destination": "/games?category=scratch-cards",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/players/games",
+      "destination": "/players-games.html"
+    },
+    {
+      "source": "/players/leaderboard",
+      "destination": "/leaderboard.html"
+    }
+  ]
+}
