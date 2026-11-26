@@ -116,3 +116,43 @@
  box.querySelector('[data-cal-days]').innerHTML=html;
  box.querySelector('[data-cal-title]').textContent=now.toLocaleString('en-GB',{month:'long',year:'numeric'});
 })();
+// Scroll reveals (cards, columns, headings) and a gentle hero-illustration parallax.
+(() => {
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ if(reduce.matches||!('IntersectionObserver' in window))return;
+ const groups=[
+  '.benefit-list > li','.sd-grid > li','.feature-columns > article','.product-grid > a','.promo-links > a',
+  '.solution-tiles > li','.new-game-grid > a','.story-steps','.faq-section .faq-item',
+  '.section-heading','.solution-detail h2','.product-benefits h2','.page-heading','.new-contact'
+ ];
+ const els=[];
+ groups.forEach(sel=>document.querySelectorAll(sel).forEach(el=>{
+  if(el.closest('.product-hero,.game-showcase,.release-hero'))return; // hero areas stay put
+  const sibs=[...el.parentElement.children].filter(c=>c.matches(sel));
+  el.style.setProperty('--ri',Math.min(sibs.indexOf(el),6));
+  el.dataset.reveal='';els.push(el);
+ }));
+ if(!els.length)return;
+ // Anything already on screen at load shows immediately (no flash of hidden content).
+ const vh=innerHeight;
+ els.forEach(el=>{const r=el.getBoundingClientRect();if(r.top<vh*.92&&r.bottom>0)el.classList.add('is-revealed');});
+ document.documentElement.classList.add('reveal-on');
+ const io=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('is-revealed');io.unobserve(e.target);}
+ }),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+ els.forEach(el=>{if(!el.classList.contains('is-revealed'))io.observe(el);});
+ // Failsafe: never leave content hidden (e.g. throttled or non-composited views).
+ setTimeout(()=>els.forEach(el=>el.classList.add('is-revealed')),4000);
+})();
+(() => {
+ const vis=document.querySelector('.product-hero .ph-visual,.product-hero .agg-visual');
+ if(!vis||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const hero=vis.closest('.product-hero');let ticking=false;
+ const update=()=>{ticking=false;
+  if(innerWidth<960){vis.style.removeProperty('--py');return;}
+  const r=hero.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
+  vis.style.setProperty('--py',(Math.max(-r.top,0)*-.12).toFixed(1)+'px'); // drifts up as you scroll away
+ };
+ addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
+ addEventListener('resize',update);update();
+})();

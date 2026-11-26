@@ -78,3 +78,7 @@ html[data-logo="pink"] .game-showcase.cine{
 }
 @media(pointer:coarse){.cine-toggle{min-height:44px;min-width:74px}}
 @media(prefers-reduced-motion:reduce){.cine-tab,.cine-cta{transition:none}}
+
+/* First slide stays hidden until its artwork is decoded, then fades in. */
+.cine-stage .cine-slide.is-current{transition:opacity .3s ease-out}
+.game-showcase.cine:not(.is-ready) .cine-slide.is-current{opacity:0}

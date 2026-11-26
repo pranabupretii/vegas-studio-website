@@ -374,3 +374,43 @@ h1,h2,h3{letter-spacing:-.045em}h1{font-weight:800}p{line-height:1.65}
 @media(max-width:1100px){.sd-grid--4,.sd-grid--3{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.solution-detail{padding:52px 0 60px}.sd-grid--4,.sd-grid--3{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.sd-card:hover{transform:none}}
+
+/* Homepage FAQ */
+.home-faq{padding-top:80px}
+.home-faq-note{margin-top:18px;color:var(--muted)}
+.home-faq a,.home-faq-note a{color:#E50A60;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.home-faq .faq-item summary:focus-visible{outline:2px solid #E50A60;outline-offset:4px}
+
+/* Scroll reveals: content starts visible; only once JS marks the page does it
+   wait to fade/slide in. A timeout failsafe reveals everything regardless. */
+.reveal-on [data-reveal]{opacity:0;translate:0 18px;transition:opacity .55s ease-out,translate .55s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--ri,0) * 70ms)}
+.reveal-on [data-reveal].is-revealed{opacity:1;translate:none}
+@media(prefers-reduced-motion:reduce){.reveal-on [data-reveal]{opacity:1;translate:none;transition:none}}
+
+/* Hero illustration parallax: JS sets --py on scroll (transform only). */
+.ph-visual,.product-hero .agg-visual{transform:translate3d(0,var(--py,0px),0);will-change:transform}
+
+/* Category landing pages */
+.category-links{display:flex;gap:22px;margin-top:22px}
+.category-page{padding-bottom:80px}
+.category-page #game-count{margin:0 0 18px;color:var(--muted)}
+
+/* Glossary */
+.glossary{display:grid;grid-template-columns:180px minmax(0,1fr);gap:56px;padding-bottom:90px}
+.glossary-index{position:sticky;top:110px;align-self:start;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.glossary-index a{display:grid;place-items:center;height:38px;border:1px solid #e3dbe6;border-radius:8px;font:800 15px/1 'Plus Jakarta Sans',Arial,sans-serif;color:var(--plum);text-decoration:none;transition:background .18s ease-out,border-color .18s ease-out,color .18s ease-out}
+.glossary-index a:hover{background:#FFF5F8;border-color:#E50A60;color:#E50A60}
+.glossary-index a:focus-visible{outline:2px solid #E50A60;outline-offset:2px}
+.glossary-group{scroll-margin-top:100px;padding-bottom:22px}
+.glossary-group+.glossary-group{border-top:1px solid #eee8f0;padding-top:26px}
+.glossary-group h2{margin:0 0 6px;font:800 34px/1 'Plus Jakarta Sans',Arial,sans-serif;color:#E50A60}
+.glossary-group dl{margin:0}
+.glossary-term{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px;padding:16px 0;scroll-margin-top:100px}
+.glossary-term dt{font:800 18px/1.35 'Plus Jakarta Sans',Arial,sans-serif;color:var(--plum)}
+.glossary-term dd{margin:0;font:500 16px/1.65 'Plus Jakarta Sans',Arial,sans-serif;color:#4d4558;max-width:640px}
+.glossary-term:target{background:#FFF5F8;border-radius:10px;padding-inline:14px}
+@media(max-width:800px){
+ .glossary{grid-template-columns:1fr;gap:28px}
+ .glossary-index{position:static;grid-template-columns:repeat(auto-fill,minmax(40px,1fr))}
+ .glossary-term{grid-template-columns:1fr;gap:6px}
+}

@@ -177,7 +177,7 @@
   highlight(i);
   syncPlayback();   // freeze the timer until the new slide is decoded
   settle();         // only one active transition
-  if(current===-1){await prepare(front,i,my);if(my!==token)return;current=i;restartBar();loadArt((i+1)%games.length);return;}
+  if(current===-1){await prepare(front,i,my);if(my!==token)return;showcase.classList.add('is-ready');current=i;restartBar();loadArt((i+1)%games.length);return;}
   const reduce=motion.matches;
   await Promise.all([prepare(back,i,my),reduce?null:prepare(bandSlide,i,my)]);
   if(my!==token)return;  // a newer click took over; the old slide stayed up
