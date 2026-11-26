@@ -96,3 +96,11 @@
   card.append(svg);layoutCardTrace(card);cardResize.observe(art);
  });
 })();
+// How it works timeline: fill the line and light the steps once in view.
+(() => {
+ const story=document.querySelectorAll('[data-story]');
+ if(!story.length)return;
+ if(!('IntersectionObserver' in window)){story.forEach(s=>s.classList.add('is-in'));return;}
+ const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}}),{threshold:.35});
+ story.forEach(s=>io.observe(s));
+})();

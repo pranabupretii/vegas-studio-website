@@ -1,76 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-/* Featured games: retro-arcade banner (dark focal point on a white page). */
+/* Featured games: full-width Cinematic Gallery (dark hero on a white page). */
 .game-showcase{display:none}
-html[data-logo="pink"] .game-showcase{display:grid}
+html[data-logo="pink"] .game-showcase.cine{
+ --cine-pink:#E50A60;--cine-plum:#301547;--cine-berry:#5b0d38;--cine-lav:#cdbde3;--cine-cyan:#66E7F2;
+ display:block;position:relative;margin:0 0 40px;padding:0;border:0;border-radius:18px;overflow:hidden;
+ background:var(--cine-plum);color:#fff;box-shadow:0 20px 45px #3015471f
+}
 
-/* Banner */
-.arcade-stage{--arcade-pink:#E50A60;--arcade-plum:#301547;--arcade-cyan:#66E7F2;--arcade-lav:#c9b8dd;position:relative;isolation:isolate;overflow:hidden;width:100%;aspect-ratio:16/9;align-self:start;background:var(--arcade-plum);color:#fff}
+/* Stage: fixed aspect ratio so long titles / late images never move the page. */
+.cine-stage{position:relative;isolation:isolate;overflow:hidden;width:100%;aspect-ratio:21/8;background:var(--cine-plum)}
 
-/* Background: enlarged, blurred artwork + deep-plum overlay that thins
-   toward the right edge + faint CRT scanlines (background only). */
-.arcade-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background-color:var(--arcade-plum);background-position:center;background-size:cover;background-repeat:no-repeat}
-.arcade-bg:before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#301547 0%,#301547f2 30%,#301547c7 58%,#3015477a 82%,#30154733 100%)}
-.arcade-bg:after{content:'';position:absolute;inset:0;z-index:2;background:repeating-linear-gradient(0deg,#0000 0 2px,#0b041466 2px 3px);opacity:.55}
+/* Two persistent slide buffers; the incoming one sits on top and fades up. */
+.cine-slide{position:absolute;inset:0;overflow:hidden;isolation:isolate;background:var(--cine-plum);z-index:2;opacity:0;pointer-events:none;will-change:opacity}
+.cine-slide.is-current{z-index:1;opacity:1;pointer-events:auto}
+/* Game's own wide artwork, visual kept on the right; static (never moves). */
+.cine-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:0}
+.cine-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#301547 0%,#301547 30%,#301547e6 40%,#3015478c 55%,#30154700 72%),linear-gradient(0deg,#301547b3 0%,#30154700 28%)}
 
-/* Content: poster (~22%) + one left-aligned copy column. */
-.arcade-content{position:absolute;inset:0;z-index:1;display:grid;grid-template-columns:24.5% minmax(0,1fr);gap:5%;align-items:center;padding:0 6% 0 5%}
-.arcade-poster{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;box-shadow:0 0 0 1px #ffffff26,0 18px 40px #0b041480}
-.arcade-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
-.arcade-rank{font:400 clamp(64px,6vw,80px)/.9 'Archivo Black',Impact,'Arial Black',sans-serif;color:var(--arcade-plum);-webkit-text-stroke:1.5px var(--arcade-cyan);text-shadow:3px 3px 0 var(--arcade-cyan);letter-spacing:-.02em}
-.arcade-label{margin-top:14px;font:700 13px/1.2 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--arcade-cyan)}
-.arcade-title{margin:12px 0 0;font:400 clamp(36px,3.4vw,52px)/1.02 'Archivo Black',Impact,'Arial Black',sans-serif;color:#fff;letter-spacing:-.01em;max-width:100%;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:2.04em}
-.arcade-provider{margin:10px 0 0;font:400 16px/1.4 Arial,sans-serif;color:var(--arcade-lav)}
-.arcade-cta{display:inline-flex;align-items:center;margin-top:24px;padding:13px 22px;border-radius:6px;background:var(--arcade-pink);color:#fff!important;font:700 14px/1 Arial,sans-serif;text-decoration:none;transition:background .18s ease,box-shadow .18s ease}
-.arcade-cta:hover{background:#c90854;box-shadow:0 0 22px #e50a6066}
-.arcade-cta:focus-visible{outline:3px solid var(--arcade-cyan);outline-offset:3px}
+/* Copy block on the left: label, title, provider, button, tightly grouped. */
+.cine-copy{position:absolute;z-index:2;left:5%;top:50%;transform:translateY(-50%);width:min(46%,560px);display:flex;flex-direction:column;align-items:flex-start}
+.cine-label{font:700 12px/1.2 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--cine-cyan)}
+.cine-num{margin-left:6px;color:#fff}
+.cine-title{margin:12px 0 0;font:400 clamp(48px,4.4vw,60px)/1.02 'Archivo Black',Impact,'Arial Black',sans-serif;color:#fff;letter-spacing:-.01em;max-width:100%;height:2.04em;display:flex;flex-direction:column;justify-content:flex-end}
+/* Reserved two-line box; a one-line title sits at its bottom, next to the provider. */
+.cine-title span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word}
+.cine-provider{margin:8px 0 0;font:400 16px/1.4 Arial,sans-serif;color:var(--cine-lav)}
+.cine-cta{display:inline-flex;align-items:center;margin-top:16px;padding:13px 22px;border-radius:6px;background:var(--cine-pink);color:#fff!important;font:700 14px/1 Arial,sans-serif;text-decoration:none;transition:background .18s ease-out,box-shadow .18s ease-out}
+.cine-cta:hover{background:#c90854;box-shadow:0 0 22px #e50a6066}
+.cine-cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
-/* Slim pink progress bar along the bottom edge. */
-.arcade-progress{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:4;background:#ffffff1a}
-.arcade-progress span{display:block;height:100%;background:var(--arcade-pink);transform:scaleX(0);transform-origin:left}
+/* Centre band: a fixed window onto a full-size copy of the incoming slide.
+   Top/height are set in px by JS so the copy lines up exactly. */
+.cine-band{position:absolute;left:0;right:0;z-index:3;overflow:hidden;opacity:0;pointer-events:none;will-change:transform,opacity}
+.cine-band>.cine-slide{position:absolute;left:0;right:0;bottom:auto;opacity:1;z-index:auto}
 
-/* Two persistent slide buffers + one centre band. The incoming buffer sits
-   above the current one and fades up; the band (a fixed window onto a copy
-   of the incoming slide) moves with transform only. */
-.arcade-slide{position:absolute;inset:0;overflow:hidden;isolation:isolate;background:var(--arcade-plum);z-index:2;opacity:0;pointer-events:none;will-change:opacity}
-.arcade-slide.is-current{z-index:1;opacity:1;pointer-events:auto}
-.arcade-band{position:absolute;left:0;right:0;top:32%;height:36%;z-index:3;overflow:hidden;opacity:0;pointer-events:none;will-change:transform,opacity}
-.arcade-band>.arcade-slide{top:-88.8889%;height:277.7778%;bottom:auto;opacity:1;z-index:auto}
+/* Pause control, upper-right, above the effect. */
+.cine-toggle{position:absolute;top:14px;right:14px;z-index:5;min-height:32px;padding:7px 13px;border:1px solid #ffffff4d;border-radius:20px;background:#241039cc;color:#fff;font:600 11px/1.2 Arial,sans-serif;cursor:pointer}
+.cine-toggle:hover{background:#4a1d4a}.cine-toggle:focus-visible{outline:2px solid var(--cine-pink);outline-offset:3px}.cine-toggle:disabled{opacity:.75;cursor:default}
 
-/* Pause control */
-.showcase-toggle{position:absolute;top:12px;right:12px;z-index:5;background:#241039cc;color:#fff;border:1px solid #ffffff40;border-radius:20px;padding:7px 11px;font:600 11px/1.2 Arial,sans-serif;cursor:pointer;min-height:32px}
-.showcase-toggle:hover{background:#4a1d4a}.showcase-toggle:focus-visible{outline:3px solid #66E7F2;outline-offset:3px}.showcase-toggle:disabled{opacity:.75;cursor:default}
+/* Tab strip along the bottom of the banner. */
+.cine-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:12px 14px 15px;background:var(--cine-plum)}
+.cine-tab{display:grid;grid-template-columns:56px auto minmax(0,1fr);align-items:center;gap:10px;min-width:0;padding:7px 10px 7px 7px;border:2px solid #ffffff1f;border-radius:10px;background:#3a1b55b3;color:#efe6f7;text-align:left;cursor:pointer;font:700 12px/1.25 Arial,sans-serif;transition:background .18s ease-out,border-color .18s ease-out}
+.cine-tab img{width:56px;height:36px;object-fit:cover;border-radius:6px;display:block}
+.cine-tab-num{font-size:11px;color:var(--cine-lav);font-weight:400}
+.cine-tab-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cine-tab:hover{background:#4a2266d9}
+.cine-tab[aria-pressed="true"]{border-color:var(--cine-pink);background:var(--cine-berry);color:#fff}
+.cine-tab[aria-pressed="true"] .cine-tab-num{color:#ff8fb8;font-weight:700}
+.cine-tab:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
-/* Collection list (unchanged behaviour). */
-.showcase-list{min-width:0;align-self:center}
-.showcase-list-label{font:700 10px/1.4 Arial,sans-serif;letter-spacing:.14em;color:var(--muted);padding:6px 12px 12px}
-.showcase-choices{display:grid;gap:5px}
-.showcase-choice{display:grid;grid-template-columns:24px 38px minmax(0,1fr);align-items:center;gap:10px;width:100%;padding:9px 10px;border:1px solid transparent;border-radius:7px;text-align:left;color:var(--ink);background:transparent;cursor:pointer;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease;font:600 12px/1.3 Arial,sans-serif}
-.showcase-choice img{width:38px;height:38px;object-fit:cover;border-radius:5px}
-.choice-number{color:var(--muted);font-size:11px;font-weight:400}
-.showcase-choice[aria-pressed="true"]{background:#fde7f0;border-color:#E50A6066;box-shadow:inset 3px 0 0 #E50A60}
-.showcase-choice[aria-pressed="true"] .choice-number{color:#E50A60;font-weight:800}
-.showcase-choice:focus-visible{outline:3px solid #E50A60;outline-offset:3px}
+/* Thin pink progress bar along the bottom edge (scaleX only). */
+.cine-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff14;z-index:6}
+.cine-progress span{display:block;height:100%;background:var(--cine-pink);transform:scaleX(0);transform-origin:left}
 
 @media(max-width:1100px){
- .arcade-content{padding:0 5% 0 4%}
+ .cine-stage{aspect-ratio:16/7}
+ .cine-copy{width:52%}
+ .cine-tab{grid-template-columns:44px minmax(0,1fr);gap:8px}
+ .cine-tab img{width:44px;height:32px}
+ .cine-tab-num{display:none}
 }
-/* Mobile: compact poster left, selector below the banner. */
-@media(max-width:800px){
- .arcade-stage{aspect-ratio:6/5}
- .arcade-content{grid-template-columns:30% minmax(0,1fr);gap:18px;padding:30px 18px 12px}
- .arcade-rank{font-size:clamp(40px,10vw,48px);-webkit-text-stroke-width:1px;text-shadow:2px 2px 0 var(--arcade-cyan)}
- .arcade-label{margin-top:10px;font-size:11px;letter-spacing:.18em}
- .arcade-title{font-size:clamp(24px,6.4vw,30px);margin-top:8px}
- .arcade-provider{font-size:14px;margin-top:6px}
- .arcade-cta{margin-top:16px;padding:12px 16px;font-size:13px}
- .showcase-choices{grid-template-columns:1fr 1fr}
- .showcase-list-label{padding-top:4px}
+/* Mobile: art on top-right, copy over a plum fade at the bottom, swipeable tabs. */
+@media(max-width:700px){
+ html[data-logo="pink"] .game-showcase.cine{border-radius:14px}
+ .cine-stage{aspect-ratio:4/5}
+ .cine-art{object-position:72% center}
+ .cine-shade{background:linear-gradient(0deg,#301547 0%,#301547 34%,#301547cc 50%,#30154700 74%),linear-gradient(90deg,#30154780 0%,#30154700 60%)}
+ .cine-copy{top:auto;bottom:22px;left:18px;right:18px;width:auto;transform:none}
+ .cine-label{font-size:11px;letter-spacing:.2em}
+ .cine-title{font-size:clamp(32px,9.4vw,38px);margin-top:8px}
+ .cine-provider{font-size:14px;margin-top:4px}
+ .cine-cta{margin-top:12px;padding:12px 18px;font-size:13px}
+ .cine-tabs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:8px;padding:10px 12px 14px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+ .cine-tabs::-webkit-scrollbar{display:none}
+ .cine-tab{flex:0 0 auto;width:200px;grid-template-columns:44px auto minmax(0,1fr);scroll-snap-align:start}
+ .cine-tab-num{display:inline}
 }
-@media(max-width:480px){
- .arcade-content{grid-template-columns:32% minmax(0,1fr);gap:14px;padding:30px 14px 12px}
- .showcase-choice{grid-template-columns:28px minmax(0,1fr);gap:8px;padding:8px;font-size:10px}
- .showcase-choice img{width:28px;height:30px}
- .choice-number{display:none}
-}
-@media(pointer:coarse){.showcase-toggle{min-height:44px;min-width:74px}}
-@media(prefers-reduced-motion:reduce){.game-showcase .arcade-cta,.game-showcase .showcase-choice{transition:none}}
+@media(pointer:coarse){.cine-toggle{min-height:44px;min-width:74px}}
+@media(prefers-reduced-motion:reduce){.cine-tab,.cine-cta{transition:none}}
