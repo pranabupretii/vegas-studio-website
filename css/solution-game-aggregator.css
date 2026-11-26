@@ -369,3 +369,8 @@
  .gx-d-wire i,.gx-d-bus:after,.gx-d-link:after,.gx-live-badge i,.gx-tile.is-pop{animation:none!important}
  .gx-toggle,.gx-tile,.gx-own-card a,.gx-btn{transition:none}
 }
+
+/* Rollout fix: line runs centre-to-centre of the first and last dots, and sits under them. */
+.gx-timeline:before,.gx-timeline:after{z-index:0;left:23px;right:calc((100% - 120px) / 6 - 23px)}
+.gx-timeline li{z-index:1}
+.gx-tl-dot{box-shadow:0 0 0 6px #fff}
