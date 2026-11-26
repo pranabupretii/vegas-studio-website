@@ -104,3 +104,15 @@
  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}}),{threshold:.35});
  story.forEach(s=>io.observe(s));
 })();
+// Marketing hero: show the current month in the decorative campaign calendar.
+(() => {
+ const box=document.querySelector('[data-cal]');if(!box)return;
+ const now=new Date(),y=now.getFullYear(),m=now.getMonth(),today=now.getDate();
+ const first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();
+ let html='';
+ for(let i=0;i<first;i++)html+='<i></i>';
+ for(let d=1;d<=days;d++)html+='<i'+(d===today?' class="is-pick"':'')+'>'+d+'</i>';
+ for(let i=first+days;i%7;i++)html+='<i></i>';
+ box.querySelector('[data-cal-days]').innerHTML=html;
+ box.querySelector('[data-cal-title]').textContent=now.toLocaleString('en-GB',{month:'long',year:'numeric'});
+})();
