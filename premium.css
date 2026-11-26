@@ -74,3 +74,39 @@ h1,h2,h3{letter-spacing:-.045em}h1{font-weight:800}p{line-height:1.65}
 .new-game-card:focus-visible .card-sweep{opacity:1;transition:none}
 .new-game-card:focus-visible .card-sweep:before{transform:translateX(290%) skewX(-20deg);transition:transform .6s cubic-bezier(.45,0,.25,1) .1s}
 @media(prefers-reduced-motion:reduce){.card-sweep{display:none}}
+
+/* For Operators: subtle pink-accent hover. 180ms ease-out, reverses on exit. */
+.operator-zone{--op-pink:#E50A60;--op-tint:#FFF5F8}
+.operator-zone .corner-trace,.operator-zone .trace-sweep{display:none}
+/* Solution cards: whole card is the link; lift 3px + soft plum shadow. */
+.operator-zone .product-card{background:#fff;transition:transform .18s ease-out,box-shadow .18s ease-out,border-color .18s ease-out}
+.operator-zone .product-arrow{display:inline-block;font-variant-emoji:text;transition:transform .18s ease-out,color .18s ease-out}
+/* Rows: tint only, text stays put. */
+.operator-zone .promo-links a,.operator-zone .promo-links a:hover{padding:23px 8px}
+.operator-zone .promo-links a{transition:background-color .18s ease-out}
+.operator-zone .promo-links b{display:inline-block;font-variant-emoji:text;color:var(--op-pink);transition:transform .18s ease-out}
+/* Explore all solutions: pink underline draws left -> right over the grey one. */
+.operator-zone .new-text-link{border-bottom:0;padding-bottom:5px;background-image:linear-gradient(var(--op-pink),var(--op-pink)),linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom,left bottom;background-size:0% 2px,100% 1px;transition:background-size .18s ease-out}
+.operator-zone .new-text-link:hover{color:inherit}
+@media(hover:hover){
+ .operator-zone .product-card:hover{transform:translateY(-3px);border-color:var(--line);box-shadow:0 14px 30px #30154720}
+ .operator-zone .product-card:hover .product-arrow{color:var(--op-pink);transform:translate(3px,-3px)}
+ .operator-zone .promo-links a:hover{background-color:var(--op-tint)}
+ .operator-zone .promo-links a:hover b{transform:translate(3px,-3px)}
+ .operator-zone .new-text-link:hover{background-size:100% 2px,100% 1px}
+}
+/* Without a mouse: no lift, just a brief pale-pink tap tint. */
+@media(hover:none){
+ .operator-zone .product-card:hover{transform:none;box-shadow:none}
+ .operator-zone .product-card:hover .product-arrow{transform:none}
+ .operator-zone .product-card:active,.operator-zone .promo-links a:active{background-color:var(--op-tint)}
+ .operator-zone .product-card,.operator-zone .promo-links a{-webkit-tap-highlight-color:transparent;transition:background-color .18s ease-out}
+}
+/* Keyboard focus: 2px pink outline (plus the hover state). */
+.operator-zone .product-card:focus-visible,.operator-zone .promo-links a:focus-visible,.operator-zone .new-text-link:focus-visible{outline:2px solid var(--op-pink);outline-offset:3px}
+.operator-zone .product-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 30px #30154720}
+.operator-zone .product-card:focus-visible .product-arrow{color:var(--op-pink);transform:translate(3px,-3px)}
+.operator-zone .promo-links a:focus-visible{background-color:var(--op-tint);outline-offset:-2px}
+.operator-zone .promo-links a:focus-visible b{transform:translate(3px,-3px)}
+.operator-zone .new-text-link:focus-visible{background-size:100% 2px,100% 1px}
+@media(prefers-reduced-motion:reduce){.operator-zone .product-card:hover,.operator-zone .product-card:focus-visible{transform:none}}
