@@ -58,32 +58,41 @@
   const sweep=document.createElement('span');sweep.className='trace-sweep';sweep.setAttribute('aria-hidden','true');
   target.append(sweep,svg);layoutTrace(target);traceResize.observe(target);
  });
- // Game posters: four lavender lines start together, one at each rounded
- // corner, and run clockwise to the next corner, outlining the whole card
- // (artwork + category strip). Each segment is pathLength=1 so the long and
- // short edges finish at the same moment. Animation lives in premium.css.
+ // Game thumbnails: four pink lines start together, one at each rounded
+ // corner, and run clockwise to the next corner around the artwork only
+ // (title/category stay outside). The 3px stroke sits just outside the art
+ // with a 1px white gap. The SVG is an overlay on the card, sized to the art
+ // plus a margin, so nothing in the layout moves. Each segment is
+ // pathLength=1 so long and short edges meet at the same moment (premium.css).
+ const PAD=4,GAP=1,STROKE=3;
  function layoutCardTrace(card){
-  const svg=card.querySelector(':scope > .card-trace');
-  if(!svg)return;
-  const w=card.offsetWidth,h=card.offsetHeight;
+  const art=card.querySelector(':scope > .new-game-art'),svg=card.querySelector(':scope > .card-trace');
+  if(!art||!svg)return;
+  const w=art.offsetWidth,h=art.offsetHeight;
   if(!w||!h)return;
-  const s=1; // half the 2px stroke, keeps the line on the card edge
-  const r=Math.max(0,Math.min(parseFloat(getComputedStyle(card).borderTopLeftRadius)||0,w/2,h/2)-s);
-  const L=s,T=s,R=w-s,B=h-s,a='A '+r+' '+r+' 0 0 1';
-  svg.setAttribute('viewBox','0 0 '+w+' '+h);
+  const W=w+PAD*2,H=h+PAD*2,ar=parseFloat(getComputedStyle(art).borderTopLeftRadius)||0;
+  Object.assign(svg.style,{left:(art.offsetLeft-PAD)+'px',top:(art.offsetTop-PAD)+'px',width:W+'px',height:H+'px'});
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  const ring=(o)=>{const L=PAD-o,T=PAD-o,R=PAD+w+o,B=PAD+h+o,r=ar+o;return{L,T,R,B,r,a:'A '+r+' '+r+' 0 0 1'};};
+  const g=ring(GAP/2); // white gap ring, centred 0.5px outside the art
+  svg.children[0].setAttribute('d','M '+(g.L+g.r)+' '+g.T+' H '+(g.R-g.r)+' '+g.a+' '+g.R+' '+(g.T+g.r)+' V '+(g.B-g.r)+' '+g.a+' '+(g.R-g.r)+' '+g.B+' H '+(g.L+g.r)+' '+g.a+' '+g.L+' '+(g.B-g.r)+' V '+(g.T+g.r)+' '+g.a+' '+(g.L+g.r)+' '+g.T+' Z');
+  const p=ring(GAP+STROKE/2),{L,T,R,B,r}=p,arc=p.a; // pink stroke centre line
   const segs=[
-   'M '+(L+r)+' '+T+' H '+(R-r)+' '+a+' '+R+' '+(T+r), // top-left -> top-right
-   'M '+R+' '+(T+r)+' V '+(B-r)+' '+a+' '+(R-r)+' '+B, // top-right -> bottom-right
-   'M '+(R-r)+' '+B+' H '+(L+r)+' '+a+' '+L+' '+(B-r), // bottom-right -> bottom-left
-   'M '+L+' '+(B-r)+' V '+(T+r)+' '+a+' '+(L+r)+' '+T  // bottom-left -> top-left
+   'M '+(L+r)+' '+T+' H '+(R-r)+' '+arc+' '+R+' '+(T+r), // top-left -> top-right
+   'M '+R+' '+(T+r)+' V '+(B-r)+' '+arc+' '+(R-r)+' '+B, // top-right -> bottom-right
+   'M '+(R-r)+' '+B+' H '+(L+r)+' '+arc+' '+L+' '+(B-r), // bottom-right -> bottom-left
+   'M '+L+' '+(B-r)+' V '+(T+r)+' '+arc+' '+(L+r)+' '+T  // bottom-left -> top-left
   ];
-  [...svg.children].forEach((path,i)=>path.setAttribute('d',segs[i]));
+  [...svg.querySelectorAll('.trace-line')].forEach((path,i)=>path.setAttribute('d',segs[i]));
  }
- const cardResize=new ResizeObserver(entries=>entries.forEach(entry=>layoutCardTrace(entry.target)));
+ const cardResize=new ResizeObserver(entries=>entries.forEach(entry=>layoutCardTrace(entry.target.closest('.new-game-card'))));
  document.querySelectorAll('.new-game-card').forEach(card=>{
+  const art=card.querySelector(':scope > .new-game-art');if(!art)return;
   const svg=document.createElementNS(svgNS,'svg');svg.classList.add('card-trace');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
-  for(let i=0;i<4;i++){const path=document.createElementNS(svgNS,'path');path.setAttribute('pathLength','1');svg.append(path);}
-  const sweep=document.createElement('span');sweep.className='card-sweep';sweep.setAttribute('aria-hidden','true');
-  card.append(sweep,svg);layoutCardTrace(card);cardResize.observe(card);
+  const gap=document.createElementNS(svgNS,'path');gap.classList.add('trace-gap');svg.append(gap);
+  for(let i=0;i<4;i++){const path=document.createElementNS(svgNS,'path');path.classList.add('trace-line');path.setAttribute('pathLength','1');svg.append(path);}
+  // Light sweep lives inside the artwork so it is clipped to the thumbnail.
+  const sweep=document.createElement('span');sweep.className='card-sweep';sweep.setAttribute('aria-hidden','true');art.append(sweep);
+  card.append(svg);layoutCardTrace(card);cardResize.observe(art);
  });
 })();

@@ -21,7 +21,7 @@
  showcase.setAttribute('aria-roledescription','carousel');
  let current=-1,layer=0,animations=[],outgoing,elapsed=0,last=0,frame=0;
  let userPaused=false,hovered=false,focused=false,visible=false;
- const duration=6000;
+ const duration=3000;
  function isRunning(){return !userPaused&&!hovered&&!focused&&visible&&!document.hidden&&!motion.matches;}
  function syncPlayback(){
   cancelAnimationFrame(frame);frame=0;last=0;
