@@ -24,6 +24,12 @@ marked `data-sample` in the HTML, so you can find them all with:
 | Careers | Team tools/skills, day-in-the-life timelines, "30-minute" call, tasks "under three hours", six perks (flexible hours, hybrid, learning budget, play days, equipment, wellbeing incl. birthday off), first-weeks plan | Your real hiring process and benefits |
 | Brand guidelines | Minimum logo sizes (120px / 30mm), colour proportions (55/28/11/6) | Your real brand rules |
 | Contact | Reply times per desk, hours (Mon–Fri 09:00–17:30 UTC) and the open/closed indicator that uses them | Your real hours and response times |
+| Players Hub home | Player card (Nova_27, Lv 12, 2,340/3,000 XP, 5-day streak, quests +40/+20/+20 XP), "+40 XP" and "Quest complete" chips, quest examples, daily-reward week, XP level ladder | Leave as illustration, or match the official hub |
+| Live RTP | Worked example (2,000 staked, 2,900 back = 145%). The variance model's imaginary 96% game is labelled "Illustration only" on the page | Leave as illustration |
+| Top wins | Multiplier worked example (€16 on €0.50 = 32×) | Leave as illustration |
+| Leaderboard | Example XP track (155 XP), example streak week, "your position" card (your_alias, 640 XP) | Leave as illustration |
+
+Players Hub real data kept exactly: the Live RTP, Top wins and Leaderboard figures from the official hub's public snapshot of 25 November 2026 (only change: "1 days" corrected to "1 day").
 
 ## Product claims to confirm (not tagged, written as things you offer)
 
@@ -33,6 +39,7 @@ marked `data-sample` in the HTML, so you can find them all with:
 - **Promo games:** a "daily calendar" format, cost per thousand plays shown before launch, daily and total budget caps, "players never pay to take part".
 - **Custom games:** promo video and a 30-day review at handover, artwork ownership agreed in contract, testers who check the maths matches the screen.
 - **Affiliates:** "we reply to every application", email updates if a release date moves, a named contact.
+- **Players Hub:** the 20 new FAQ answers, streak rule ("usually starts again"), fair-play rules and "how wins are recorded" steps are written in general terms, not from the official hub's actual terms.
 - **Careers:** team descriptions and the "real projects" captions (game facts are real; who worked on what is not confirmed).
 
 ## Asset and data issues found
