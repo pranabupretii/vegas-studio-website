@@ -414,3 +414,192 @@ h1,h2,h3{letter-spacing:-.045em}h1{font-weight:800}p{line-height:1.65}
  .glossary-index{position:static;grid-template-columns:repeat(auto-fill,minmax(40px,1fr))}
  .glossary-term{grid-template-columns:1fr;gap:6px}
 }
+
+/* ===== Rest-of-site: solution-style visuals ===== */
+.ph-visual svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.vz-chip{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:30px;background:#ffffffeb;color:#301547;font:800 14px/1 'Plus Jakarta Sans',Arial,sans-serif;box-shadow:0 12px 28px #0b041466}
+.vz-chip svg{width:18px;height:18px;color:#E50A60}
+
+/* For operators: tilted game mosaic */
+.vz-mosaic{position:relative;max-width:600px;margin-left:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:24px;transform:rotate(-4deg)}
+.vz-mosaic img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;box-shadow:0 0 0 1px #ffffff33,0 14px 26px #0b041480;animation:vz-float 6s ease-in-out infinite;animation-delay:calc(var(--i) * -.8s)}
+.vz-mosaic img:nth-child(even){translate:0 18px}
+.vz-chip--a{left:-6px;bottom:-4px;transform:rotate(4deg)}
+.vz-chip--b{right:8px;top:-8px;transform:rotate(4deg)}
+@keyframes vz-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* Affiliates: promo kit */
+.vz-kit{max-width:520px;margin-left:auto;display:grid;gap:12px;padding:16px;border-radius:18px;background:#ffffff12;border:1px solid #ffffff2e;box-shadow:0 26px 50px #0b041480;font-family:'Plus Jakarta Sans',Arial,sans-serif}
+.vz-kit-banner{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3.2/1}
+.vz-kit-banner img{width:100%;height:100%;object-fit:cover;object-position:right center}
+.vz-kit-banner span{position:absolute;left:14px;bottom:12px;padding:6px 12px;border-radius:20px;background:#E50A60;color:#fff;font-weight:800;font-size:13px}
+.vz-kit-row.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vz-kit-card,.vz-kit-stat{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;padding:12px 14px;border-radius:12px;background:#fff;color:#2a1838}
+.vz-kit-card small,.vz-kit-stat small{grid-column:1/-1;color:#6b5f78;font-size:12px}
+.vz-kit-card b{font-size:15px;font-weight:800}
+.vz-kit-card svg{width:20px;height:20px;color:#E50A60}
+.vz-kit-stat b{font-size:22px;font-weight:800}
+.vz-kit-stat em{font-style:normal;font-weight:800;font-size:12px;color:#1b8a4b;background:#e5f7ec;padding:3px 8px;border-radius:20px}
+.vz-kit-assets{display:flex;align-items:center;gap:8px}
+.vz-kit-assets img{width:64px;height:40px;object-fit:cover;border-radius:6px;box-shadow:0 0 0 1px #ffffff40}
+.vz-kit-assets span{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:8px;background:#E50A60;color:#fff;font-weight:800;font-size:13px}
+.vz-kit-assets svg{width:16px;height:16px}
+
+/* Media partners: press card */
+.vz-press{max-width:600px;margin-left:auto;display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:center;font-family:'Plus Jakarta Sans',Arial,sans-serif}
+.vz-press-card{border-radius:16px;overflow:hidden;background:#fff;color:#2a1838;box-shadow:0 26px 50px #0b041480;transform:rotate(-2deg)}
+.vz-press-card img{display:block;width:100%;aspect-ratio:2.2/1;object-fit:cover;object-position:right center}
+.vz-press-card>div{padding:16px 18px 18px}
+.vz-tag{display:inline-block;padding:4px 10px;border-radius:20px;background:#fde7f0;color:#E50A60;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.vz-press-card h3{margin:10px 0 0;font-size:20px;font-weight:800;line-height:1.2;color:#301547}
+.vz-press-card p{margin:8px 0 0;font-size:13px;line-height:1.5;color:#5b5266}
+.vz-press-meta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:#8a7d96}
+.vz-press-meta svg{width:14px;height:14px}
+.vz-press-side{display:grid;gap:12px}
+.vz-file{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;padding:14px;border-radius:14px;background:#ffffff14;border:1px solid #ffffff33;color:#fff}
+.vz-file svg{grid-row:span 2;width:30px;height:30px;color:#ff6aa4}
+.vz-file b{font-size:15px}.vz-file small{font-size:12px;color:#cdbde3}
+
+/* Math: model card */
+.vz-math{max-width:520px;margin-left:auto;padding:22px;border-radius:18px;background:linear-gradient(160deg,#ffffff1a,#ffffff0a);border:1px solid #ffffff33;box-shadow:0 26px 50px #0b041480;font-family:'Plus Jakarta Sans',Arial,sans-serif;color:#fff}
+.vz-math-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdbde3}
+.vz-math-head b{padding:4px 10px;border-radius:20px;background:#E50A60;color:#fff;font-size:11px}
+.vz-math-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.vz-math-grid>div{padding:12px;border-radius:12px;background:#ffffff12}
+.vz-math-grid small{display:block;font-size:11px;color:#cdbde3}
+.vz-math-grid b{display:block;margin-top:4px;font-size:20px;font-weight:800}
+.vz-meter{display:flex;gap:3px;margin-top:9px}
+.vz-meter i{flex:1;height:10px;border-radius:3px;background:#E50A60}.vz-meter i.off{background:#ffffff33}
+.vz-curve{display:block;width:100%;height:110px;margin-top:14px}
+.vz-curve .fill{fill:#e50a6033;stroke:none}.vz-curve .line{stroke:#ff4f97;stroke-width:2.5;vector-effect:non-scaling-stroke}
+.vz-pay{display:grid;grid-template-columns:1fr auto;gap:8px 12px;margin-top:12px;font-size:13px}
+.vz-pay span{color:#e8dcf3}.vz-pay b{color:#ffd34d;margin-right:4px}.vz-pay em{font-style:normal;font-weight:800;text-align:right}
+
+/* Events: meeting planner */
+.vz-planner{max-width:460px;margin-left:auto;padding:20px;border-radius:18px;background:#fff;color:#2a1838;box-shadow:0 26px 50px #0b041480;font-family:'Plus Jakarta Sans',Arial,sans-serif}
+.vz-planner-head{display:flex;align-items:center;gap:10px}
+.vz-planner-head svg{width:22px;height:22px;color:#E50A60}
+.vz-planner-head b{font-size:18px;font-weight:800}
+.vz-planner-head span{margin-left:auto;font-size:12px;color:#8a7d96}
+.vz-days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:16px}
+.vz-days span{padding:9px 0;border-radius:10px;background:#f4eff6;text-align:center;font-weight:700;font-size:13px}
+.vz-days .on{background:#301547;color:#fff}
+.vz-slots{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.vz-slots li{display:grid;grid-template-columns:56px 1fr;gap:0 12px;padding:11px 12px;border-radius:12px;border:1px solid #ece4ef}
+.vz-slots time{grid-row:span 2;align-self:center;font-weight:800;color:#E50A60}
+.vz-slots b{font-size:14px}.vz-slots small{font-size:12px;color:#8a7d96}
+.vz-slots .on{border-color:#E50A60;background:#FFF5F8}
+.vz-planner-cta{display:block;margin-top:14px;padding:12px;border-radius:10px;background:#E50A60;color:#fff;text-align:center;font-weight:800;font-size:14px}
+
+/* About: fanned covers + stats */
+.vz-studio{max-width:600px;margin-left:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.vz-fan{position:relative;height:300px}
+.vz-fan img{position:absolute;left:50%;top:50%;width:62%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;box-shadow:0 0 0 1px #ffffff40,0 18px 34px #0b041499;transform:translate(-50%,-50%) translateX(calc((var(--i) - 1) * 42%)) rotate(calc((var(--i) - 1) * 9deg));z-index:calc(3 - var(--i))}
+.vz-fan img:nth-child(2){z-index:4}
+.vz-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vz-stats>div{padding:18px 16px;border-radius:14px;background:#ffffff12;border:1px solid #ffffff2e}
+.vz-stats b{display:block;font:800 34px/1 'Plus Jakarta Sans',Arial,sans-serif;color:#fff}
+.vz-stats small{display:block;margin-top:6px;font:600 13px/1.3 'Plus Jakarta Sans',Arial,sans-serif;color:#cdbde3}
+
+/* Careers: teams */
+.vz-teams{max-width:500px;margin-left:auto;padding:22px;border-radius:18px;background:#ffffff12;border:1px solid #ffffff2e;box-shadow:0 26px 50px #0b041480;font-family:'Plus Jakarta Sans',Arial,sans-serif;color:#fff}
+.vz-teams-title{margin:0;font-weight:800;font-size:16px}
+.vz-teams ul{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vz-teams li{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;background:#fff;color:#301547;font-weight:800;font-size:14px}
+.vz-teams li svg{width:24px;height:24px;color:#E50A60;flex:none}
+.vz-teams-foot{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:13px;color:#cdbde3}
+.vz-teams-foot svg{width:18px;height:18px;color:#ffd34d}
+
+/* Brand: logo + swatches */
+.vz-brand{max-width:540px;margin-left:auto;display:grid;gap:12px;font-family:'Plus Jakarta Sans',Arial,sans-serif}
+.vz-brand-logo{display:grid;place-items:center;padding:34px;border-radius:18px;background:#1d0b2c;border:1px solid #ffffff2e;box-shadow:0 26px 50px #0b041480}
+.vz-brand-logo img{width:78%;height:auto}
+.vz-swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.vz-swatches span{display:flex;flex-direction:column;justify-content:flex-end;height:96px;padding:10px;border-radius:12px;background:var(--c);color:#fff;box-shadow:0 0 0 1px #ffffff33}
+.vz-swatches span.light{color:#301547}
+.vz-swatches b{font-size:14px}.vz-swatches small{font-size:11px;opacity:.85}
+.vz-type{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:12px;background:#ffffff12;border:1px solid #ffffff2e;color:#fff}
+.vz-type b{font-size:40px;font-weight:800;line-height:1}
+.vz-type span{font-weight:700;font-size:15px}.vz-type small{font-weight:500;color:#cdbde3}
+
+/* Contact: conversation */
+.vz-chat{max-width:460px;margin-left:auto;display:grid;gap:12px;font-family:'Plus Jakarta Sans',Arial,sans-serif}
+.vz-msg{max-width:86%;padding:14px 16px;border-radius:16px;box-shadow:0 14px 30px #0b041466}
+.vz-msg b{display:block;margin-bottom:4px;font-size:12px}
+.vz-msg p{margin:0;font-size:15px;line-height:1.45}
+.vz-msg.in{justify-self:start;background:#fff;color:#2a1838;border-bottom-left-radius:4px}
+.vz-msg.in b{color:#E50A60}
+.vz-msg.out{justify-self:end;background:#E50A60;color:#fff;border-bottom-right-radius:4px}
+.vz-msg.short{padding:12px 16px}
+.vz-typing{justify-self:end;display:flex;gap:5px;padding:12px 16px;border-radius:16px;background:#ffffff1f}
+.vz-typing i{width:7px;height:7px;border-radius:50%;background:#fff;animation:vz-dot 1.2s ease-in-out infinite}
+.vz-typing i:nth-child(2){animation-delay:.15s}.vz-typing i:nth-child(3){animation-delay:.3s}
+@keyframes vz-dot{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+
+/* Light index pages for games */
+.games-index{padding-bottom:20px}
+.games-index .category-links{margin-top:20px}
+
+/* Catalogue cards: real RTP + volatility */
+.new-game-caption{flex-wrap:wrap}
+.new-game-caption h3{flex:1 1 auto}
+.game-stats{order:3;flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.game-stats b{padding:4px 9px;border-radius:20px;background:#f4eff6;color:#4d4558;font:700 11px/1.2 'Plus Jakarta Sans',Arial,sans-serif}
+.game-stats b:first-child{background:#fde7f0;color:#c4084f}
+
+/* Homepage: trust band + partner marquee (sample data) */
+.trust-band{padding:56px 0 46px;background:#fff;border-bottom:1px solid #eee8f0;overflow:hidden}
+.trust-stats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.trust-stats li{padding-left:20px;border-left:3px solid #E50A60}
+.trust-stats b{display:block;font:800 clamp(36px,4vw,54px)/1 'Plus Jakarta Sans',Arial,sans-serif;color:#301547;letter-spacing:-.03em}
+.trust-stats span{display:block;margin-top:8px;font:600 15px/1.3 'Plus Jakarta Sans',Arial,sans-serif;color:#5b5266}
+.trust-label{margin:40px 0 0;text-align:center;font:700 12px/1 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#8a7d96}
+.partner-marquee{margin-top:20px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.pm-track{display:flex;gap:56px;width:max-content;animation:pm-scroll 38s linear infinite}
+.partner-marquee:hover .pm-track{animation-play-state:paused}
+.pm-logo{font:800 22px/1 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-.02em;color:#b3a8bd;white-space:nowrap;transition:color .18s ease-out}
+.pm-logo:hover{color:#301547}
+@keyframes pm-scroll{to{transform:translateX(calc(-50% - 28px))}}
+
+/* Homepage: testimonials (sample data) */
+.testimonials{padding:84px 0;background:var(--paper)}
+.testimonials h2{margin:14px 0 0;font:800 clamp(32px,3.6vw,48px)/1.08 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-.03em;color:var(--plum)}
+.tm-list{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tm-card{display:flex;flex-direction:column;padding:30px 28px;border-radius:16px;background:#fff;border:1px solid #ebe3ec}
+.tm-mark{width:34px;height:34px;fill:none;stroke:#E50A60;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tm-card blockquote{margin:16px 0 0;flex:1}
+.tm-card blockquote p{margin:0;font:600 18px/1.55 'Plus Jakarta Sans',Arial,sans-serif;color:#2a1838}
+.tm-who{margin:22px 0 0;padding-top:18px;border-top:1px solid #eee8f0;font-family:'Plus Jakarta Sans',Arial,sans-serif}
+.tm-who b{display:block;color:#301547}.tm-who span{font-size:14px;color:#6b5f78}
+
+/* Game pages: dark banner in the solutions style (art stays on the right). */
+.game-banner{background-color:#301547;background-size:cover;background-position:right center;color:#fff;min-height:500px;display:flex;align-items:center}
+.game-banner:before{background:linear-gradient(90deg,#301547 0%,#301547 34%,#301547e0 46%,#3015477a 64%,#30154700 82%),linear-gradient(0deg,#30154799,#30154700 30%)}
+.game-banner .breadcrumb{color:#ff8fbb}
+.game-banner .new-eyebrow{color:#d9cbe8;letter-spacing:.24em}
+.game-banner h1{font:800 clamp(48px,5.4vw,80px)/1 'Plus Jakarta Sans','Archivo Black',Arial,sans-serif;letter-spacing:-.035em;color:#fff}
+.game-banner .game-feature-pills span{background:#ffffff1a;border-color:#ffffff40;color:#fff}
+.game-banner .new-primary{background:#E50A60;border-color:#E50A60;color:#fff}
+.game-banner .secondary-button{background:transparent;border:1.5px solid #ffffffb3;color:#fff}
+.game-banner .secondary-button:hover{border-color:#fff;background:#ffffff14}
+
+@media(max-width:1100px){
+ .vz-mosaic,.vz-kit,.vz-press,.vz-math,.vz-planner,.vz-studio,.vz-teams,.vz-brand,.vz-chat{margin-inline:auto}
+ .trust-stats{grid-template-columns:1fr 1fr;row-gap:28px}
+ .tm-list{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .vz-press{grid-template-columns:1fr}
+ .vz-math-grid{grid-template-columns:1fr 1fr}
+ .vz-studio{grid-template-columns:1fr}
+ .vz-fan{height:240px}
+ .vz-swatches span{height:76px}
+ .pm-logo{font-size:18px}
+ .game-banner{min-height:440px}
+ .game-banner:before{background:linear-gradient(0deg,#301547 0%,#301547 40%,#301547b3 62%,#30154733 100%)}
+}
+@media(prefers-reduced-motion:reduce){.vz-mosaic img,.vz-typing i,.pm-track{animation:none}}
+
+.new-game-caption .game-stats{justify-content:flex-start}
+.new-game-caption .game-stats b{margin:0;display:inline-block;transform:none}
+@media(max-width:600px){.vz-mosaic{transform:none;gap:10px;padding:18px 0 34px}.vz-mosaic img:nth-child(even){translate:none}.vz-chip{padding:8px 12px;font-size:12px}.vz-chip--a{left:0;bottom:0;transform:none}.vz-chip--b{right:0;top:0;transform:none}}
