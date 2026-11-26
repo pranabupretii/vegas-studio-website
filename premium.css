@@ -603,3 +603,98 @@ h1,h2,h3{letter-spacing:-.045em}h1{font-weight:800}p{line-height:1.65}
 .new-game-caption .game-stats{justify-content:flex-start}
 .new-game-caption .game-stats b{margin:0;display:inline-block;transform:none}
 @media(max-width:600px){.vz-mosaic{transform:none;gap:10px;padding:18px 0 34px}.vz-mosaic img:nth-child(even){translate:none}.vz-chip{padding:8px 12px;font-size:12px}.vz-chip--a{left:0;bottom:0;transform:none}.vz-chip--b{right:0;top:0;transform:none}}
+
+/* ===== Page detail blocks (BGaming-style depth) ===== */
+.pd-block{--pd-cyan:#66E7F2;--pd-pink:#E50A60}
+.pd-block h2{margin:14px 0 0;font:800 clamp(30px,3.4vw,46px)/1.08 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-.03em;color:var(--plum)}
+.pd-lede{margin:14px 0 0;max-width:580px;font:500 17px/1.6 'Plus Jakarta Sans',Arial,sans-serif;color:#4d4558}
+.pd-cards,.pd-models,.pd-providers,.pd-related,.pd-games,.pd-split{padding:80px 0}
+.pd-models,.pd-related{background:var(--paper)}
+.pd-icon{width:40px;height:40px;fill:none;stroke:var(--pd-pink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+
+/* Stats band: plum with cyan numbers that count up */
+.pd-stats{padding:56px 0;background:radial-gradient(70% 140% at 85% 0%,#5b1450,#30154700 60%),#301547;color:#fff}
+.pd-stat-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+.pd-stat-list li{padding:6px 0 6px 22px;border-left:2px solid #66e7f259}
+.pd-stat-list b{display:block;font:800 clamp(38px,4.2vw,58px)/1 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-.03em;color:var(--pd-cyan);font-variant-numeric:tabular-nums}
+.pd-stat-list li>span{display:block;margin-top:10px;font:600 15px/1.35 'Plus Jakarta Sans',Arial,sans-serif;color:#d9cbe8}
+
+/* Cards (shared by cards / models) */
+.pd-card-grid,.pd-model-grid{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:18px}
+.pd-cols-3,.pd-model-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pd-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pd-card{position:relative;display:flex;flex-direction:column;padding:30px 26px;border-radius:16px;background:#fff;border:1px solid #ebe3ec;transition:transform .25s ease-out,box-shadow .25s ease-out,border-color .25s ease-out}
+.pd-card:before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--pd-pink),#66E7F2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .25s ease-out;pointer-events:none}
+.pd-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(48,21,71,.12);border-color:transparent}
+.pd-card:hover:before{opacity:1}
+.pd-card:hover .pd-icon{transform:translateY(-3px) rotate(-6deg)}
+.pd-card h3{margin:20px 0 0;font:800 21px/1.2 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-.02em;color:var(--plum)}
+.pd-card p{margin:10px 0 0;font:500 15px/1.6 'Plus Jakarta Sans',Arial,sans-serif;color:#5b5266}
+.pd-ideal{margin-top:auto!important;padding-top:18px;border-top:1px solid #f0e9f2;font-size:14px!important}
+.pd-ideal b{display:block;margin-bottom:4px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pd-pink)}
+
+/* Provider / platform wall */
+.pd-provider-grid{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.pd-provider-grid li{display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px;background:#fff;border:1px solid #ebe3ec;transition:transform .2s ease-out,border-color .2s ease-out,box-shadow .2s ease-out}
+.pv-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#f1ebf4;color:#8a7d96;font:800 14px/1 'Plus Jakarta Sans',Arial,sans-serif;transition:background .2s ease-out,color .2s ease-out}
+.pv-name{font:800 15px/1.2 'Plus Jakarta Sans',Arial,sans-serif;color:#8a7d96;transition:color .2s ease-out}
+.pd-provider-grid li:hover{transform:translateY(-2px);border-color:#f3c3d6;box-shadow:0 8px 18px rgba(48,21,71,.08)}
+.pd-provider-grid li:hover .pv-mark{background:var(--pd-pink);color:#fff}
+.pd-provider-grid li:hover .pv-name{color:var(--plum)}
+
+/* Feature split rows (image + copy, alternating) */
+.pd-split-row{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;margin-top:56px}
+.pd-split-row.is-flip .pd-split-media{order:2}
+.pd-split-media{border-radius:18px;overflow:hidden;box-shadow:0 22px 44px rgba(48,21,71,.18)}
+.pd-split-media img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .6s ease-out}
+.pd-split-row:hover .pd-split-media img{transform:scale(1.04)}
+.pd-split-copy h3{margin:0;font:800 clamp(26px,2.6vw,34px)/1.1 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-.025em;color:var(--plum)}
+.pd-split-copy p{margin:14px 0 0;font:500 17px/1.6 'Plus Jakarta Sans',Arial,sans-serif;color:#4d4558}
+.pd-split-copy ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.pd-split-copy li{display:flex;gap:10px;align-items:flex-start;font:600 15px/1.45 'Plus Jakarta Sans',Arial,sans-serif;color:#2a1838}
+.pd-split-copy li svg{width:18px;height:18px;flex:none;margin-top:1px;fill:none;stroke:var(--pd-pink);stroke-width:2;stroke-linecap:round}
+
+/* Game row */
+.pd-game-row{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pd-game-row a{display:block;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #ebe3ec;text-decoration:none;transition:transform .25s ease-out,box-shadow .25s ease-out}
+.pd-game-row img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .5s ease-out}
+.pd-game-row span{display:block;padding:14px 16px}
+.pd-game-row b{display:block;font:800 16px/1.2 'Plus Jakarta Sans',Arial,sans-serif;color:var(--plum)}
+.pd-game-row small{font:600 13px/1.4 'Plus Jakarta Sans',Arial,sans-serif;color:#8a7d96}
+.pd-game-row a:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(48,21,71,.14)}
+.pd-game-row a:hover img{transform:scale(1.06)}
+.pd-game-row a:focus-visible{outline:2px solid var(--pd-pink);outline-offset:3px}
+
+/* Related links */
+.pd-related-grid{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pd-related-grid a{display:flex;align-items:center;gap:16px;padding:22px;border-radius:14px;background:#fff;border:1px solid #ebe3ec;text-decoration:none;transition:transform .2s ease-out,box-shadow .2s ease-out,border-color .2s ease-out}
+.pd-related-grid .pd-icon{width:34px;height:34px;flex:none}
+.pd-related-grid b{display:block;font:800 17px/1.2 'Plus Jakarta Sans',Arial,sans-serif;color:var(--plum)}
+.pd-related-grid small{display:block;margin-top:4px;font:500 14px/1.4 'Plus Jakarta Sans',Arial,sans-serif;color:#6b5f78}
+.pd-go{width:20px;height:20px;margin-left:auto;flex:none;fill:none;stroke:var(--pd-pink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease-out}
+.pd-related-grid a:hover{transform:translateY(-3px);border-color:#f3c3d6;box-shadow:0 8px 20px rgba(48,21,71,.10)}
+.pd-related-grid a:hover .pd-go{transform:translateX(4px)}
+.pd-related-grid a:focus-visible{outline:2px solid var(--pd-pink);outline-offset:3px}
+
+/* FAQ block spacing */
+.pd-faq{padding-top:80px}
+
+/* Reveal: cards rise and settle (uses translate/scale so hover transforms still work) */
+.reveal-on [data-reveal]{scale:.97;transition:opacity .6s ease-out,translate .6s cubic-bezier(.2,.7,.2,1),scale .6s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--ri,0) * 80ms)}
+.reveal-on [data-reveal].is-revealed{scale:1}
+.reveal-on .pd-split-row[data-reveal]{translate:0 28px}
+
+@media(max-width:1100px){
+ .pd-cols-4,.pd-game-row{grid-template-columns:1fr 1fr}
+ .pd-cols-3,.pd-model-grid,.pd-related-grid{grid-template-columns:1fr 1fr}
+ .pd-split-row{gap:32px}
+}
+@media(max-width:700px){
+ .pd-cards,.pd-models,.pd-providers,.pd-related,.pd-games,.pd-split{padding:56px 0}
+ .pd-cols-3,.pd-cols-4,.pd-model-grid,.pd-related-grid{grid-template-columns:1fr}
+ .pd-split-row,.pd-split-row.is-flip{grid-template-columns:1fr;gap:20px;margin-top:40px}
+ .pd-split-row.is-flip .pd-split-media{order:0}
+ .pd-provider-grid{grid-template-columns:1fr 1fr}
+ .pd-stat-list{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){.pd-card,.pd-card:hover,.pd-game-row a,.pd-related-grid a{transition:none;transform:none}.reveal-on [data-reveal]{scale:1}}

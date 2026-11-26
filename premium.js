@@ -123,7 +123,7 @@
  const groups=[
   '.benefit-list > li','.sd-grid > li','.feature-columns > article','.product-grid > a','.promo-links > a',
   '.solution-tiles > li','.new-game-grid > a','.story-steps','.faq-section .faq-item',
-  '.section-heading','.solution-detail h2','.product-benefits h2','.page-heading','.new-contact'
+  '.section-heading','.solution-detail h2','.product-benefits h2','.page-heading','.new-contact','.pd-stat-list > li','.pd-provider-grid > li','.pd-model-grid > li','.pd-card-grid > li','.pd-related-grid > li','.pd-game-row > li','.pd-split-row','.tm-list > li','.trust-stats > li','.pd-block h2'
  ];
  const els=[];
  groups.forEach(sel=>document.querySelectorAll(sel).forEach(el=>{
@@ -155,4 +155,25 @@
  };
  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
  addEventListener('resize',update);update();
+})();
+// Count-up numbers in stats bands, once, when they scroll into view.
+(() => {
+ const nums=[...document.querySelectorAll('[data-count]')];
+ if(!nums.length||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+ const dec=el=>(el.dataset.count.split('.')[1]||'').length;
+ const fmt=(el,v)=>dec(el)?v.toFixed(dec(el)):Math.round(v).toLocaleString('en-GB');
+ const done=new WeakSet();
+ const run=el=>{
+  if(done.has(el))return;done.add(el);
+  const end=parseFloat(el.dataset.count),dur=1300,t0=performance.now();
+  const step=t=>{const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=fmt(el,end*e);if(p<1)requestAnimationFrame(step);else el.textContent=fmt(el,end);};
+  requestAnimationFrame(step);
+ };
+ const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){io.unobserve(e.target);run(e.target);}
+  else if(!done.has(e.target))e.target.textContent='0'; // off-screen: wait at zero
+ }),{threshold:.6});
+ nums.forEach(el=>io.observe(el));
+ // Failsafe: never leave a number at zero.
+ setTimeout(()=>nums.forEach(el=>{if(!done.has(el)){done.add(el);el.textContent=fmt(el,parseFloat(el.dataset.count));}}),8000);
 })();
