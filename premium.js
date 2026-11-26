@@ -33,7 +33,7 @@
  // Four independent clockwise perimeter traces, each starting at a corner.
  // Pixel-sized paths preserve the corner positions on wide and tall cards.
  const svgNS='http://www.w3.org/2000/svg';
- const traceTargets=[...document.querySelectorAll('.new-game-art,.product-card,.hover-panel,.release-cover,.screenshot-button')];
+ const traceTargets=[...document.querySelectorAll('.product-card,.hover-panel,.release-cover,.screenshot-button')];
  function layoutTrace(target){
   const svg=target.querySelector(':scope > .corner-trace');
   if(!svg)return;
@@ -57,5 +57,32 @@
   for(let i=0;i<4;i++){const path=document.createElementNS(svgNS,'path');path.setAttribute('pathLength','400');path.setAttribute('vector-effect','non-scaling-stroke');svg.append(path);}
   const sweep=document.createElement('span');sweep.className='trace-sweep';sweep.setAttribute('aria-hidden','true');
   target.append(sweep,svg);layoutTrace(target);traceResize.observe(target);
+ });
+ // Game posters: four lavender lines start together, one at each rounded
+ // corner, and run clockwise to the next corner, outlining the whole card
+ // (artwork + category strip). Each segment is pathLength=1 so the long and
+ // short edges finish at the same moment. Animation lives in premium.css.
+ function layoutCardTrace(card){
+  const svg=card.querySelector(':scope > .card-trace');
+  if(!svg)return;
+  const w=card.offsetWidth,h=card.offsetHeight;
+  if(!w||!h)return;
+  const s=1; // half the 2px stroke, keeps the line on the card edge
+  const r=Math.max(0,Math.min(parseFloat(getComputedStyle(card).borderTopLeftRadius)||0,w/2,h/2)-s);
+  const L=s,T=s,R=w-s,B=h-s,a='A '+r+' '+r+' 0 0 1';
+  svg.setAttribute('viewBox','0 0 '+w+' '+h);
+  const segs=[
+   'M '+(L+r)+' '+T+' H '+(R-r)+' '+a+' '+R+' '+(T+r), // top-left -> top-right
+   'M '+R+' '+(T+r)+' V '+(B-r)+' '+a+' '+(R-r)+' '+B, // top-right -> bottom-right
+   'M '+(R-r)+' '+B+' H '+(L+r)+' '+a+' '+L+' '+(B-r), // bottom-right -> bottom-left
+   'M '+L+' '+(B-r)+' V '+(T+r)+' '+a+' '+(L+r)+' '+T  // bottom-left -> top-left
+  ];
+  [...svg.children].forEach((path,i)=>path.setAttribute('d',segs[i]));
+ }
+ const cardResize=new ResizeObserver(entries=>entries.forEach(entry=>layoutCardTrace(entry.target)));
+ document.querySelectorAll('.new-game-card').forEach(card=>{
+  const svg=document.createElementNS(svgNS,'svg');svg.classList.add('card-trace');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+  for(let i=0;i<4;i++){const path=document.createElementNS(svgNS,'path');path.setAttribute('pathLength','1');svg.append(path);}
+  card.append(svg);layoutCardTrace(card);cardResize.observe(card);
  });
 })();

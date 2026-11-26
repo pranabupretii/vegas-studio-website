@@ -36,3 +36,13 @@ html[data-logo="pink"] .game-showcase{display:grid;grid-template-columns:minmax(
 @media(max-width:480px){.showcase-content{grid-template-columns:85px minmax(0,1fr);gap:15px;padding:20px 15px}.showcase-cover{aspect-ratio:1}.showcase-copy h3{font-size:23px;margin:12px 0}.showcase-kicker{font-size:8px;letter-spacing:.1em;gap:8px}.showcase-number{font-size:27px}.showcase-copy p{font-size:12px;margin-bottom:15px}.showcase-action{font-size:11px;padding:11px 12px;gap:8px}.showcase-choice{grid-template-columns:28px minmax(0,1fr);gap:8px;padding:8px;font-size:10px}.showcase-choice img{width:28px;height:30px}.choice-number{display:none}.showcase-stage{min-height:275px}}
 @media(pointer:coarse){.showcase-toggle{min-height:44px;min-width:74px}.showcase-stage .showcase-content{padding-top:65px}}
 @media(prefers-reduced-motion:reduce){.game-showcase *{transition:none!important;animation:none!important}}
+
+/* Horizontal slice transition between featured games. */
+.showcase-stage.is-slicing .showcase-background img{transition:none}
+.showcase-slices{position:absolute;inset:0;z-index:2;pointer-events:none;background:#12081f;overflow:hidden}
+.slice-band{position:absolute;inset:0;will-change:transform}
+.slice-band>.slice-slide{position:absolute;inset:0}
+.slice-slide{display:flex;align-items:center;isolation:isolate;background:#301547;color:#fff;overflow:hidden}
+.slice-slide .showcase-background{z-index:-2}
+.slice-slide .showcase-background img{transition:none}
+.slice-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(95deg,#241039dd,#24103980 65%,#24103999)}

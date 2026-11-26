@@ -44,7 +44,7 @@
  const updateFocus=()=>{focused=showcase.contains(document.activeElement)&&document.activeElement!==toggle;syncPlayback();};
  showcase.addEventListener('focusin',updateFocus);showcase.addEventListener('focusout',()=>queueMicrotask(updateFocus));
  document.addEventListener('visibilitychange',syncPlayback);
- motion.addEventListener('change',()=>{animations.forEach(a=>a.cancel());outgoing?.remove();syncPlayback();});
+ motion.addEventListener('change',()=>{animations.forEach(a=>a.cancel());outgoing?.remove();sliceLayer?.remove();sliceLayer=null;stage.classList.remove('is-slicing');syncPlayback();});
  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;syncPlayback();},{threshold:.25}).observe(showcase);
  const choices=showcase.querySelector('.showcase-choices');
  const buttons=games.map((game,i)=>{
@@ -57,18 +57,54 @@
   button.addEventListener('focus',()=>select(i));button.addEventListener('click',()=>select(i));
   return button;
  });
+ // Each slide is copied whole (blurred background, shade, poster, copy) so a
+ // band cuts through every layer at exactly the same height.
+ function snapshotSlide(){
+  const slide=document.createElement('div');slide.className='slice-slide';
+  const bg=document.createElement('div');bg.className='showcase-background';
+  const visibleBg=stage.querySelector(':scope>.showcase-background img.is-visible');
+  const img=document.createElement('img');img.alt='';img.className='is-visible';if(visibleBg)img.src=visibleBg.src;bg.append(img);
+  const shade=document.createElement('div');shade.className='slice-shade';
+  const copy=content.cloneNode(true);copy.removeAttribute('id');
+  slide.append(bg,shade,copy);return slide;
+ }
+ // Horizontal "TV out of alignment" slice: the wide middle band shows the
+ // incoming game first, outer bands follow, every band jitters sideways, then
+ // all settle in line. at = moment (0..1) the band flips to the new slide.
+ const BANDS=[
+  {top:0,bottom:82,at:.56,x:[0,10,-6,3,0]},
+  {top:18,bottom:66,at:.34,x:[0,-12,8,-3,0]},
+  {top:34,bottom:34,at:.06,x:[0,16,-10,4,0]},
+  {top:66,bottom:18,at:.34,x:[0,-9,12,-2,0]},
+  {top:82,bottom:0,at:.56,x:[0,7,-11,3,0]}
+ ];
+ const SLICE_MS=500;
+ let sliceLayer=null;
+ function runSlice(oldSlide){
+  const newSlide=snapshotSlide();
+  const layer=document.createElement('div');layer.className='showcase-slices';layer.setAttribute('aria-hidden','true');layer.inert=true;
+  BANDS.forEach(band=>{
+   const el=document.createElement('div');el.className='slice-band';el.style.clipPath='inset('+band.top+'% 0 '+band.bottom+'% 0)';
+   const before=oldSlide.cloneNode(true),after=newSlide.cloneNode(true);el.append(before,after);layer.append(el);
+   const x=band.x,o=[0,.18,.42,.62,.82];
+   animations.push(el.animate(x.map((v,i)=>({transform:'translateX('+v+'px)',offset:o[i]})).concat({transform:'translateX(0)',offset:1}),{duration:SLICE_MS,easing:'linear',fill:'both'}));
+   animations.push(after.animate([{opacity:0,offset:0},{opacity:0,offset:band.at},{opacity:1,offset:band.at},{opacity:1,offset:1}],{duration:SLICE_MS,easing:'linear',fill:'both'}));
+  });
+  stage.append(layer);sliceLayer=layer;
+  const cleanup=()=>{if(sliceLayer===layer){layer.remove();sliceLayer=null;stage.classList.remove('is-slicing');}};
+  animations[animations.length-1].onfinish=cleanup;setTimeout(cleanup,SLICE_MS+80);
+ }
  function select(index){
   if(current===index)return;
   const game=games[index],first=current===-1;
-  animations.forEach(a=>a.cancel());animations=[];outgoing?.remove();
-  if(!first&&!motion.matches){
-   outgoing=content.cloneNode(true);outgoing.classList.add('showcase-outgoing');outgoing.setAttribute('aria-hidden','true');outgoing.inert=true;stage.append(outgoing);
-   const old=outgoing;
-   const exit=old.animate([{opacity:1,transform:'translateY(0)',clipPath:'inset(0 0 0 0)'},{opacity:0,transform:'translateY(-22px)',clipPath:'inset(0 0 100% 0)'}],{duration:420,easing:'cubic-bezier(.22,.61,.36,1)',fill:'forwards'});
-   exit.onfinish=()=>old.remove();animations.push(exit);
-  }
+  const animate=!first&&!motion.matches;
+  const oldSlide=animate?snapshotSlide():null;
+  animations.forEach(a=>a.cancel());animations=[];outgoing?.remove();sliceLayer?.remove();sliceLayer=null;
+  // Ranking highlight and progress restart move with the first slice.
   current=index;elapsed=0;progress.firstElementChild.style.transform='scaleX(0)';
   buttons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
+  // Swap the real slide instantly underneath; the slice layer covers it.
+  stage.classList.toggle('is-slicing',animate);
   const backgrounds=showcase.querySelectorAll('.showcase-background img');layer=1-layer;
   backgrounds[layer].src=game.image;backgrounds.forEach((bg,i)=>bg.classList.toggle('is-visible',i===layer));
   const cover=showcase.querySelector('.showcase-cover');cover.src=game.image;cover.alt=game.name+' artwork';
@@ -76,11 +112,7 @@
   showcase.querySelector('.showcase-number').textContent=String(index+1).padStart(2,'0');
   showcase.querySelector('.showcase-copy p').textContent='Discover '+game.name+' in the Vegas Studio game collection.';
   const action=showcase.querySelector('.showcase-action');action.href=game.href;action.setAttribute('aria-label','View '+game.name+' details');
-  if(!first&&!motion.matches){
-   [content.querySelector('.showcase-cover'),content.querySelector('.showcase-copy')].forEach((element,i)=>{
-    animations.push(element.animate([{opacity:0,transform:'translateY(26px)',clipPath:'inset(100% 0 0 0)'},{opacity:1,transform:'translateY(0)',clipPath:'inset(0 0 0 0)'}],{duration:540,delay:i*70,easing:'cubic-bezier(.22,.61,.36,1)',fill:'backwards'}));
-   });
-  }
+  if(animate)runSlice(oldSlide);
  }
  select(0);
  syncPlayback();
