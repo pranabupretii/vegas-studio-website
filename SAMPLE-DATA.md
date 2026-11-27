@@ -26,7 +26,7 @@ marked `data-sample` in the HTML, so you can find them all with:
 | Contact | Reply times per desk, hours (Mon–Fri 09:00–17:30 UTC) and the open/closed indicator that uses them | Your real hours and response times |
 | Players Hub home | Player card (Nova_27, Lv 12, 2,340/3,000 XP, 5-day streak, quests +40/+20/+20 XP), "+40 XP" and "Quest complete" chips, quest examples, daily-reward week, XP level ladder | Leave as illustration, or match the official hub |
 | Live RTP | Worked example (2,000 staked, 2,900 back = 145%). The variance model's imaginary 96% game is labelled "Illustration only" on the page | Leave as illustration |
-| Top wins | Multiplier worked example (€16 on €0.50 = 32×) | Leave as illustration |
+| Top wins | Multiplier worked example ($16 on $0.50 = 32×) | Leave as illustration |
 | Leaderboard | Example XP track (155 XP), example streak week, "your position" card (your_alias, 640 XP) | Leave as illustration |
 
 Players Hub real data kept exactly: the Live RTP, Top wins and Leaderboard figures from the official hub's public snapshot of 25 November 2026 (only change: "1 days" corrected to "1 day").

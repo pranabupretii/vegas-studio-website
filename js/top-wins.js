@@ -8,7 +8,7 @@
 
   function format(v, kind) {
     var n = Math.round(v).toLocaleString('en-GB');
-    return kind === 'eur' ? '€' + n : n + '×';
+    return kind === 'usd' ? '$' + n : n + '×';
   }
 
   /* Count a published figure up, always finishing on the original text */

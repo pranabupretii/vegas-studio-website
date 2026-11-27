@@ -6,7 +6,7 @@
   doc.classList.add('pe-js');
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const eur = n => '€' + Math.round(n).toLocaleString('en-GB');
+  const usd = n => '$' + Math.round(n).toLocaleString('en-GB');
 
   /* ---- Hero statement prints in ---- */
   const hero = $('.pe-hero');
@@ -66,7 +66,7 @@
     const n = Number(pIn.value), r = Number(rIn.value);
     const model = ($('input[name="pe-model"]:checked') || {}).value || 'rs';
     const tier = tierFor(n);
-    pOut.textContent = n; rOut.textContent = eur(r);
+    pOut.textContent = n; rOut.textContent = usd(r);
     fill(pIn); fill(rIn);
     let active = 0, totalRev = 0, totalCom = 0;
     const monthly = [];
@@ -81,21 +81,21 @@
     }
     const max = Math.max(...monthly, 1);
     bars.forEach((b, i) => b.style.setProperty('--h', Math.max(.03, monthly[i] / max).toFixed(3)));
-    out('total').textContent = eur(totalCom);
-    out('m12').textContent = eur(monthly[MONTHS - 1]);
-    out('rev').textContent = eur(totalRev);
-    out('keep').textContent = eur(totalRev - totalCom);
+    out('total').textContent = usd(totalCom);
+    out('m12').textContent = usd(monthly[MONTHS - 1]);
+    out('rev').textContent = usd(totalRev);
+    out('keep').textContent = usd(totalRev - totalCom);
     out('pct').textContent = (totalRev ? (totalCom / totalRev * 100) : 0).toFixed(1) + '%';
-    out('cpp').textContent = eur(totalCom / (n * MONTHS));
+    out('cpp').textContent = usd(totalCom / (n * MONTHS));
     const pill = out('tier');
     pill.textContent = tier.name + ' tier';
     pill.classList.toggle('is-hidden', model !== 'rs');
     if (model === 'rs') terms.innerHTML = `Revenue share at <b>${Math.round(tier.rate * 100)}%</b>, set by the ${tier.name} tier at ${n} players a month.`;
-    if (model === 'cpa') terms.innerHTML = `<b>€${CPA}</b> per qualifying first-time depositor, paid once.`;
-    if (model === 'hy') terms.innerHTML = `<b>${HY_RATE * 100}%</b> revenue share plus <b>€${HY_CPA}</b> per qualifying player.`;
+    if (model === 'cpa') terms.innerHTML = `<b>$${CPA}</b> per qualifying first-time depositor, paid once.`;
+    if (model === 'hy') terms.innerHTML = `<b>${HY_RATE * 100}%</b> revenue share plus <b>$${HY_CPA}</b> per qualifying player.`;
     tierEls.forEach((t, i) => t.classList.toggle('is-current', TIERS[i] === tier));
     const chart = $('[data-chart-label]');
-    if (chart) chart.setAttribute('aria-label', `Monthly partner earnings rise from ${eur(monthly[0])} in month 1 to ${eur(monthly[MONTHS - 1])} in month 12`);
+    if (chart) chart.setAttribute('aria-label', `Monthly partner earnings rise from ${usd(monthly[0])} in month 1 to ${usd(monthly[MONTHS - 1])} in month 12`);
   }
   [pIn, rIn].forEach(i => i && i.addEventListener('input', calc));
   $$('input[name="pe-model"]').forEach(i => i.addEventListener('change', calc));
